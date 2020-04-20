@@ -1,10 +1,8 @@
 <template>
   <div class="header">
-    <div class="header-inner">
-      <div class="logo">
-        <a href="/"><i class="ovopark-logo"></i></a>
-      </div>    
+    <div class="header-inner">   
       <ul class="p-ul">
+        <li class="logo"><i class="ovopark-logo"></i></li>
         <li class="p-li" v-for="(menu, mIndex) in menus" :key="mIndex">
           <span>{{ menu.name }}</span>
           <i class="border"></i>
@@ -14,12 +12,12 @@
             </li>
           </ul>
         </li>
+        <li class="btns">
+          <button class="login" @click="handleLogin">登录</button>
+          <a class="register" :href="`${baseURL}/webview/register/index.html#!/`" target="_blank" rel="nofollow">注册</a>
+          <a class="opretail" href="http://www.opretail.com" target="_blank">English website</a>
+        </li>
       </ul>
-      <div class="nav-btn">
-        <button class="login" @click="handleLogin">登录</button>
-        <a class="regist" href="/webview/register/index.html#!/" target="_blank" rel="nofollow">注册</a>
-        <a class="opreat" href="http://www.opretail.com" target="_blank">English website</a>
-      </div>
     </div>
   </div>
 </template>
@@ -33,7 +31,8 @@ const md5 = require('~/assets/js/md5')
 export default Vue.extend({
   data() {
     return {
-      menus: menuList
+      menus: menuList,
+      baseURL: 'http://dev.ovopark.com'
     }
   },
   methods: {
@@ -48,11 +47,8 @@ export default Vue.extend({
         }
       }).then(res => {
         let url = ''
-        let baseURL = ''
         if (window.location.host.indexOf('www') !== -1) {
-          baseURL = 'http://www.ovopark.com'
-        } else {
-          baseURL = 'http://dev.ovopark.com'
+          this.baseURL = 'http://www.ovopark.com'
         }
         if (res.result === 'true') {
           if (!res.groupId) {
@@ -67,7 +63,7 @@ export default Vue.extend({
             url = `/webview/register/index.html?signUserId=${res.signUserId}#!/join`
           }
         }
-        window.location.href = baseURL + url
+        window.location.href = this.baseURL + url
       }).catch(err => {
         console.log('err', err)
       })
@@ -89,10 +85,21 @@ export default Vue.extend({
   width: 1280px;
   margin: 0 auto;
   line-height: 60px;
+  font-size: 14px;
   .p-ul {
     display: flex;
     justify-content: space-between;
-    font-size: 14px;
+    .logo {
+      height: 60px;
+      margin-right: 100px;
+      .ovopark-logo {
+        display: inline-block;
+        width: 83px;
+        height: 42px;
+        margin-top: 9px;
+        background-image: url('//ovopark.oss-cn-hangzhou.aliyuncs.com/web/images/Ovopark_Logo.png');
+      }
+    }
     .p-li {
       width: 108px;
       text-align: center;
@@ -130,9 +137,38 @@ export default Vue.extend({
       }
     }
   }
-}
-.footer {
-  height: 100px;
-  background-color: #f2f2f2;
+  .btns {
+    margin-left: 100px;
+  }
+  .login {
+    padding: 7px 15px;
+    color: #fff;
+    border: 1px solid #fa0;
+    outline: none;
+    border-radius: 6px;
+    background-color: #fa0;
+    cursor: pointer;
+    margin-right: 10px;
+    &:hover {
+      background-color: #f90;
+    }
+  }
+  .register {
+    padding: 7px 15px;
+    color: #fa0;
+    border: 1px solid #fa0;
+    border-radius: 6px;
+    margin-right: 10px;
+    &:hover {
+      color: #fff;
+      background-color: #f90;
+    }
+  }
+  .opretail {
+    color: #666;
+    &:hover {
+      color: #fff;
+    }
+  }
 }
 </style>
