@@ -1,3 +1,4 @@
+var isDev = process.env.NODE_ENV === 'development' ? true : false
 
 module.exports = {
   mode: 'universal',
@@ -23,6 +24,7 @@ module.exports = {
   ** Global CSS
   */
   css: [
+    '@/assets/css/common.scss'
   ],
   /*
   ** Plugins to load before mounting the App
@@ -51,7 +53,9 @@ module.exports = {
     proxy: true
   },
   proxy: {
-    '/login.action': 'http://dev.ovopark.com/'
+    '/login.action': {
+      target: isDev ? 'http://dev.ovopark.com/' : 'http://www.ovopark.com'
+    }
   },
   /*
   ** Build configuration
