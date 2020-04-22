@@ -1,4 +1,3 @@
-var isDev = process.env.NODE_ENV === 'development' ? true : false
 
 module.exports = {
   mode: 'universal',
@@ -26,6 +25,13 @@ module.exports = {
   css: [
     '@/assets/css/common.scss'
   ],
+  /**
+   * 
+   */
+  env: {
+    NODE_ENV: process.env.NODE_ENV,
+    BASE_URL: process.env.BASE_URL
+  },
   /*
   ** Plugins to load before mounting the App
   */
@@ -42,8 +48,7 @@ module.exports = {
   */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios',
-    '@nuxtjs/proxy'
+    '@nuxtjs/axios'
   ],
   /*
   ** Axios module configuration
@@ -54,8 +59,8 @@ module.exports = {
   },
   proxy: {
     '/login.action': {
-      target: isDev ? 'http://dev.ovopark.com/' : 'http://www.ovopark.com'
-    }
+      target: process.env.NODE_ENV !== 'production' ? 'http://dev.ovopark.com' : 'http://www.ovopark.com'
+    } 
   },
   /*
   ** Build configuration

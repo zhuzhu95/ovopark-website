@@ -32,7 +32,7 @@ export default Vue.extend({
   data() {
     return {
       menus: menuList,
-      baseURL: 'http://dev.ovopark.com'
+      baseURL: process.env.BASE_URL
     }
   },
   methods: {
@@ -47,9 +47,6 @@ export default Vue.extend({
         }
       }).then(res => {
         let url = ''
-        if (window.location.host.indexOf('www') !== -1) {
-          this.baseURL = 'http://www.ovopark.com'
-        }
         if (res.result === 'true') {
           if (!res.groupId) {
             localStorage.setItem("ovo_loginReferrer", window.location.href)
