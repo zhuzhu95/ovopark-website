@@ -28,6 +28,15 @@
 
 <script>
 export default {
+  head() {
+    return {
+      title: '【万店掌】视频远程巡店系统_客流统计分析系统_门店客流分析统计软件',
+      meta: [
+        { hid: 'keywords', name: 'keywords', content: '视频远程巡店系统,客流统计系统,客流分析系统,客流统计分析软件,万店掌' },
+        { hid: 'description', name: 'description', content: '苏州万店掌网络科技有限公司【服务热线:400-100-1392】高效运营专家，为零售连锁等行业提供视频远程巡店系统，客流统计分析系统，门店客流分析统计软件，以及会员识别，连锁店监控等解决方案，欢迎前来咨询服务！' },
+      ]
+    }
+  },
   data() {
     return {
       bannertimer: null,
@@ -60,15 +69,6 @@ export default {
         transform: `translateX(${-this.trackOffset}%)`,
         transition: 'transform 500ms ease 0s',
       }
-    }
-  },
-  head() {
-    return {
-      title: '【万店掌】视频远程巡店系统_客流统计分析系统_门店客流分析统计软件',
-      meta: [
-        { hid: 'keywords', name: 'keywords', content: '视频远程巡店系统,客流统计系统,客流分析系统,客流统计分析软件,万店掌' },
-        { hid: 'description', name: 'description', content: '苏州万店掌网络科技有限公司【服务热线:400-100-1392】高效运营专家，为零售连锁等行业提供视频远程巡店系统，客流统计分析系统，门店客流分析统计软件，以及会员识别，连锁店监控等解决方案，欢迎前来咨询服务！' },
-      ]
     }
   },
   mounted() {
