@@ -1,6 +1,6 @@
-# wdz-website
+# nuxt-demo
 
-> ovopark website
+> My astonishing Nuxt.js project
 
 ## Build Setup
 

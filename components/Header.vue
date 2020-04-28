@@ -19,37 +19,38 @@
         </li>
       </ul>
     </div>
+    <div>
+      <input type="text" name="name" v-model="username" />
+      <br/>
+      <input type="password" name="password" v-model="password" />
+    </div>
   </div>
 </template>
-<script lang="ts">
-import Vue from 'vue'
+<script>
 import menuList from '~/assets/js/menu'
-import qs from 'qs'
 
 const md5 = require('~/assets/js/md5')
 
-export default Vue.extend({
+export default {
   data() {
     return {
       menus: menuList,
-      baseURL: process.env.BASE_URL
+      baseURL: process.env.BASE_URL || 'http://dev.ovopark.com',
+      username: '',
+      password: ''
     }
   },
   methods: {
     handleLogin() {
       const params = {
-        username: 'zxx',
-        password: md5('666666a')
+        username: this.username,
+        password: md5(this.password)
       }
-      this.$axios.$post('/login.action', qs.stringify(params), {
-        headers: {
-          'content-type': 'application/x-www-form-urlencoded'
-        }
-      }).then(res => {
+      this.$axios.$post('/login.action', params).then(res => {
         let url = ''
         if (res.result === 'true') {
           if (!res.groupId) {
-            localStorage.setItem("ovo_loginReferrer", window.location.href)
+            localStorage.setItem("ovo_loginReferrer", this.baseURL)
             localStorage.setItem("ovo_webSocketId", res.webSocketId)
             url = '/home/index.html'
           } else {
@@ -66,7 +67,7 @@ export default Vue.extend({
       })
     }
   }
-})
+}
 </script>
 <style lang="scss">
 .header {
@@ -77,6 +78,7 @@ export default Vue.extend({
   height: 60px;
   background-color: rgba(0,0,0,0.8);
   color: #fff;
+  z-index: 99;
 }
 .header-inner {
   width: 1280px;

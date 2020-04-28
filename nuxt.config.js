@@ -25,9 +25,6 @@ module.exports = {
   css: [
     '@/assets/css/common.scss'
   ],
-  /**
-   * 
-   */
   env: {
     NODE_ENV: process.env.NODE_ENV,
     BASE_URL: process.env.BASE_URL
@@ -36,19 +33,19 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    '~/plugins/axios'
   ],
   /*
   ** Nuxt.js dev-modules
   */
   buildModules: [
-    '@nuxt/typescript-build'
   ],
   /*
   ** Nuxt.js modules
   */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
   ],
   /*
   ** Axios module configuration
@@ -60,7 +57,10 @@ module.exports = {
   proxy: {
     '/login.action': {
       target: process.env.NODE_ENV !== 'production' ? 'http://dev.ovopark.com' : 'http://www.ovopark.com'
-    } 
+    },
+    '/service/*': {
+      target: process.env.NODE_ENV !== 'production' ? 'http://dev.ovopark.com' : 'http://www.ovopark.com'
+    }
   },
   /*
   ** Build configuration

@@ -4,7 +4,7 @@
 
 <style>
 .footer {
-  height: 100px;
+  height: 0;
   background-color: #f2f2f2;
 }
 </style>
